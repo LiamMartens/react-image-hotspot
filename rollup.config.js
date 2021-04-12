@@ -25,7 +25,8 @@ module.exports = {
     }),
     typescript(),
     babel({
-      babelHelpers: 'runtime'
+      babelHelpers: 'runtime',
+      exclude: '**/node_modules/**',
     }),
     postcss({
       modules: true,
