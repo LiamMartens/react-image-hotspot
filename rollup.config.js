@@ -4,6 +4,7 @@ const postcss = require('rollup-plugin-postcss');
 const commonjs = require('@rollup/plugin-commonjs');
 const replace = require('@rollup/plugin-replace');
 const peerDepsExternal = require('rollup-plugin-peer-deps-external');
+const { babel } = require('@rollup/plugin-babel');
 const { nodeResolve } = require('@rollup/plugin-node-resolve');
 
 module.exports = {
@@ -23,6 +24,9 @@ module.exports = {
       'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV)
     }),
     typescript(),
+    babel({
+      babelHelpers: 'runtime'
+    }),
     postcss({
       modules: true,
       extract: true,
