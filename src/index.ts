@@ -1,2 +1,1 @@
-import { ImageHotspot } from './ImageHotspot';
-export default { ImageHotspot };
+export * from './ImageHotspot';
