@@ -10,7 +10,7 @@ const { nodeResolve } = require('@rollup/plugin-node-resolve');
 module.exports = {
   input: './src/index.ts',
   output: {
-    format: 'es',
+    format: 'cjs',
     dir: path.join(__dirname, 'lib'),
   },
   plugins: [
