@@ -120,20 +120,20 @@ export const ImageHotspotSpot: React.FunctionComponent<Props> = ({ active, disab
     }
   }, [ref,editingState, editingStateControl]);
 
-  const onWindowKeypress = React.useCallback((event: KeyboardEvent) => {
-    if (event.key === 'Delete' && onDelete) {
+  const onWindowKeyup = React.useCallback((event: KeyboardEvent) => {
+    if (event.key === 'Delete' && onDelete && editingState.active) {
       onDelete(points);
     }
-  }, [points, onDelete]);
+  }, [points, editingState, onDelete]);
 
   React.useEffect(() => {
     window.addEventListener('click', onWindowClick);
-    window.addEventListener('keyup', onWindowKeypress);
+    window.addEventListener('keyup', onWindowKeyup);
     return () => {
       window.removeEventListener('click', onWindowClick);
-      window.removeEventListener('keyup', onWindowKeypress);
+      window.removeEventListener('keyup', onWindowKeyup);
     }
-  }, [ref, onWindowClick, onWindowKeypress]);
+  }, [ref, points, onWindowClick, onWindowKeyup]);
 
   return (
     <svg

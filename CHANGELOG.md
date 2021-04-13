@@ -1,3 +1,3 @@
 # CHANGELOG
-## v1.0.3
-* Fixed delete
+## v1.0.4
+* Fixed delete functionality
