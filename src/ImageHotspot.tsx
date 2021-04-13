@@ -13,6 +13,7 @@ type Props = {
 }
 
 export const ImageHotspot: React.FunctionComponent<Props> = ({ src, value, onChange }) => {
+  const wrapRef = React.useRef<HTMLDivElement | null>(null);
   const [wrapRect, setWrapRect] = React.useState<DOMRect>();
   const [drawingState, drawingStateControl] = useDrawingState();
 
@@ -81,10 +82,18 @@ export const ImageHotspot: React.FunctionComponent<Props> = ({ src, value, onCha
     }
   }, [value]);
 
+  React.useEffect(() => {
+    if (wrapRef.current) {
+      const rect = wrapRef.current.getBoundingClientRect();
+      setWrapRect(rect);
+    }
+  }, [wrapRef.current]);
+
   if (!src) return null;
   return (
     <div className={styles.container}>
       <div
+        ref={wrapRef}
         className={styles.wrap}
         onMouseDown={onWrapMouseDown}
         onMouseMove={onWrapMouseMove}
