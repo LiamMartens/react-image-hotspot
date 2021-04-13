@@ -124,7 +124,7 @@ export const ImageHotspotSpot: React.FunctionComponent<Props> = ({ active, disab
     if (event.key === 'Delete' && onDelete) {
       onDelete(points);
     }
-  }, [onDelete]);
+  }, [points, onDelete]);
 
   React.useEffect(() => {
     window.addEventListener('click', onWindowClick);
