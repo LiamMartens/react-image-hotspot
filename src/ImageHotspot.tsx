@@ -1,5 +1,6 @@
 import React from 'react';
 import styles from './ImageHotspot.module.css';
+import useResizeObserver from '@react-hook/resize-observer'
 import { nanoid } from 'nanoid';
 import { useDrawingState } from './hooks';
 import { ImageHotspotSpot } from './ImageHotspotSpot';
@@ -82,12 +83,9 @@ export const ImageHotspot: React.FunctionComponent<Props> = ({ src, value, onCha
     }
   }, [value]);
 
-  React.useEffect(() => {
-    if (wrapRef.current) {
-      const rect = wrapRef.current.getBoundingClientRect();
-      setWrapRect(rect);
-    }
-  }, [wrapRef.current]);
+  useResizeObserver(wrapRef.current, entry => {
+    setWrapRect(entry.contentRect);
+  });
 
   if (!src) return null;
   return (
