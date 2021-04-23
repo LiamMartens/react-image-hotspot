@@ -83,6 +83,13 @@ export const ImageHotspot: React.FunctionComponent<Props> = ({ src, value, onCha
     }
   }, [value]);
 
+  const onImageLoad = React.useCallback(() => {
+    if (wrapRef.current) {
+      const rect = wrapRef.current.getBoundingClientRect();
+      setWrapRect(rect);
+    }
+  }, [wrapRect, wrapRef.current]);
+
   useResizeObserver(wrapRef.current, entry => {
     setWrapRect(entry.contentRect);
   });
@@ -98,7 +105,7 @@ export const ImageHotspot: React.FunctionComponent<Props> = ({ src, value, onCha
         onMouseLeave={onWrapMouseUpOrLeave}
         onMouseUp={onWrapMouseUpOrLeave}
       >
-        <img src={src} />
+        <img src={src} onLoad={onImageLoad} />
         {!!(wrapRect && value) && value.map(k => {
           return (
             <ImageHotspotSpot
